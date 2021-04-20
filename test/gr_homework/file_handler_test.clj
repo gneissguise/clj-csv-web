@@ -4,7 +4,9 @@
                      testing
                      is
                      function?
-                     use-fixtures]]
+                     use-fixtures
+                     are]]
+            [clojure.string :as string]
             [clojure.data.csv :as csv]
             [clojure.java.io :as io]
             [gr-homework.file-handler :as gr]))
@@ -72,3 +74,18 @@
                 "samwise,38,protecting master frodo\n"
                 "pippin,27,throwing stones into pits in abandoned mines\n"
                 "merry,36,riding ents\n")))))
+
+(deftest file-delim-detections
+  (are [exp d s] (exp (gr/detect-delim s) d)
+    = "," "1,2,3,4,5,6,7,8,9,0"
+    = "|" "this|is|how|we|do|it"
+    = " " "I mean this is pretty much just a sentence."
+    = gr/default-file-delim (string/join
+                             gr/default-file-delim
+                             ["el" "gallo" "es" "muy" "guapo"])
+    not= "" (string/join
+             gr/default-file-delim
+             ["are" "we" "really" "testing" "" "values?"])
+    not= nil (string/join
+              gr/default-file-delim
+              ["are" "we" "really" "testing" nil "values?"])))
