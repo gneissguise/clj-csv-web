@@ -1,7 +1,7 @@
 (ns gr-homework.core-test
-  (:require [clojure.test :refer :all]
-            [gr-homework.core :refer :all]))
+  (:require [clojure.test :refer [deftest testing is]]
+            [gr-homework.core :as gr]))
 
-(deftest a-test
-  (testing "FIXME, I fail."
-    (is (= 0 1))))
+(deftest main-func
+  (testing "-main prints: Hello, World!"
+    (is (= "Hello, World!\n" (with-out-str (gr/-main))))))
