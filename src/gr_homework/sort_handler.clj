@@ -7,3 +7,8 @@
    (get-index s v 0))
   ([s v fv]
    (or (.indexOf (first v) s) fv)))
+
+(defn get-index-factory
+  "Generates a get-index fn populated with a data vector for reuseability"
+  [v]
+  (fn [s fv] (get-index s v fv)))

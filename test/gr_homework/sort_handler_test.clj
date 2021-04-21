@@ -52,3 +52,20 @@
     name-sort datata datata-by-name
     age-sort-desc datata datata-by-age-desc
     hobby-sort datata datata-by-hobby))
+
+
+(def tmp-data [["LastName" "FirstName" "Gender" "FavoriteColor" "DateOfBirth"]
+               ["Frost" "Justin" "M" "chartreuse" "07/05/1981"]
+               ["Kibbler" "Snot" "M" "snot green" "02/28/1977"]
+               ["Greisiger" "Katie" "F" "bubble gum pink" "08/10/1983"]
+               ["Castle" "Tella" "F" "brown" "10/21/1988"]])
+(def get-tmp-data-index (gr/get-index-factory tmp-data))
+(def gender-index (get-tmp-data-index "Gender" 2))
+(def birthdate-index (get-tmp-data-index "DateOfBirth" 4))
+(def lastname-index (get-tmp-data-index "LastName" 0))
+
+(deftest get-index-builder
+  (are [col-index actual] (= col-index actual)
+    gender-index 2
+    birthdate-index 4
+    lastname-index 0))
