@@ -28,9 +28,9 @@
    ["pippin" "27" "throwing stones into pits in abandoned mines"]
    ["frodo" "50" "zzzing around the shire"]])
 
-(def name-index (gr/get-index-wrap "name" datata 0))
-(def age-index (gr/get-index-wrap "age" datata 1))
-(def hobby-index (gr/get-index-wrap "hobby" datata 2))
+(def name-index (gr/get-index "name" datata 0))
+(def age-index (gr/get-index "age" datata 1))
+(def hobby-index (gr/get-index "hobby" datata 2))
 
 (defn name-sort
   "Comparator that sorts by name, ascending"
