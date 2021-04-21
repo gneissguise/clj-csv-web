@@ -12,3 +12,5 @@ pom.xml.asc
 .hgignore
 .hg/
 .lsp/
+.calva/
+/.lein-failures
