@@ -31,7 +31,7 @@ This is a project to demonstrate some of my basic skills in clojure, with the fo
     $ lein install
 
     // Running jar:
-    $ java -jar target/gr-homework-0.2.0-standalone.jar [args]
+    $ java -jar target/gr-homework-0.3.0-standalone.jar [args]
 ## Options
 
     NA
