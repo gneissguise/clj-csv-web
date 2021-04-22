@@ -1,0 +1,11 @@
+LastName,  FirstName,  Gender,  FavoriteColor,  DateOfBirth
+Emmott, Aisha, F, Orange, 1/2/3027
+Hamilton, Oliver, M, White, 1/28/5312
+Vincent, Davina, F, Turquoise, 6/6/1841
+Powell, John, M, Sienna, 4/3/7114
+Harrington, Elisabeth, F, Maroon, 10/8/0813
+Bishop, Domenic, M, Rust, 9/12/7295
+Rosenbloom, Carl, M, Lime, 9/4/1780
+Lunt, Gil, M, Salmon, 3/28/1874
+Thatcher, Trisha, F, Brown, 9/24/1068
+Isaac, Carl, M, Barbie Pink, 5/14/6886

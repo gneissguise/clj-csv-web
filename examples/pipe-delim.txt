@@ -1,0 +1,11 @@
+LastName | FirstName | Gender | FavoriteColor | DateOfBirth
+Wilton | Bob | M | Brown | 12/25/2020
+Utterson | Sylvia | F | Emerald | 5/16/7670
+Skinner | Ethan | M | Salmon | 4/19/7362
+Nelson | Daron | M | coral | 1/2/6639
+Moss | Denny | M | Yellow | 12/11/2007
+Leslie | Moira | F | Gold | 2/23/0839
+Paterson | Ronald | M | Purple | 3/28/5757
+Lucas | Caleb | M | Green | 9/17/4808
+Edwards | Noemi | F | Rosegold | 6/25/8705
+Wilkinson | Marigold | F | Cadet blue | 11/13/8913
