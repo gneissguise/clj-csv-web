@@ -8,8 +8,22 @@
 (defn print-table
   "Uses pretty print to format and print the map table t to the console and sorts using c as comparator"
 
-  ([t] 
+  ([t]
    (print-table t sh/compr-lastname))
-  
+
   ([t c]
    (p/print-table (sort c t))))
+
+(defn horiz-rule
+  "Repeats '=' [n] times to generate a 'line'"
+  [n]
+  (apply str (repeat n "=")))
+
+(defn print-heading
+  "Prints a generated header using string [s]"
+  [s]
+  (let [hr (horiz-rule (+ (count s) 6))]
+    (println \newline
+             hr \newline
+             "  " s \newline
+             hr)))

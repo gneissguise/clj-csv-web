@@ -1,12 +1,13 @@
 (ns gr-homework.core
   (:require [clojure.tools.cli :as cli]
-            [clojure.string :as s])
+            [clojure.string :as s]
+            [gr-homework.controller :as ctrl])
   (:gen-class))
 
 (def sort-keymap {"lastname" :Lastname
-             "gender" :Gender
-             "dateofbirth" :DateOfBirth
-             "demo" :Demo})
+                  "gender" :Gender
+                  "dateofbirth" :DateOfBirth
+                  "demo" :Demo})
 
 (def cli-options
   [["-s"  "--sort SORT" "Sort option"
@@ -60,19 +61,14 @@
 
 (defn start-up
   [options]
-  (let [sort (:sort options)
-        files (:file options)
-        head-file (first files)
-        rest-files (rest files)]
-    (println "Sort: " sort)
-    (println "Files: " files)
-    (println "head-file: " head-file)
-    (println "rest-files: " rest-files)))
+  (let [srt (:sort options)
+        files (:file options)]
+    (ctrl/display files srt)))
 
 (defn -main
   "I don't do a whole lot ... yet."
   [& args]
-    (let [{:keys [options exit-message ok?]} (validate-args args)]
-      (if exit-message
-        (exit (if ok? 0 1) exit-message)
-        (start-up options))))
+  (let [{:keys [options exit-message ok?]} (validate-args args)]
+    (if exit-message
+      (exit (if ok? 0 1) exit-message)
+      (start-up options))))

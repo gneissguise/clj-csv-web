@@ -21,3 +21,14 @@
 (def compr-lastname
   #(compare [(:LastName %2)]
             [(:LastName %1)]))
+
+(defn lookup-sort
+  "Pull up a table heading and a sort comparator by keyword [k]"
+  [k]
+  (case k
+    :Gender      ["Sort by Gender, then LastName ascending"
+                  compr-gender]
+    :DateOfBirth ["Sort by DateOfBirth ascending"
+                  compr-dob]
+    :LastName    ["Sort by LastName descending"
+                  compr-lastname]))
