@@ -1,75 +1,46 @@
 (ns gr-homework.handler.sort-test
-  (:require [clojure.test :refer [deftest are testing is function?]]
+  (:require [clojure.test :refer [deftest are testing is]]
+            [gr-homework.converter.maps :as m]
             [gr-homework.handler.sort :as sh]))
 
 ;; Defining mock data and helper fns
 (def datata
-  [["name" "age" "hobby"]
-   ["frodo" "50" "zzzing around the shire"]
-   ["samwise" "38" "protecting master frodo"]
-   ["pippin" "27" "throwing stones into pits in abandoned mines"]
-   ["merry" "36" "riding ents"]])
+  [["LastName" "DateOfBirth" "Gender"]
+   ["Michaels" "1/1/1970" "M"]
+   ["Steward" "5/30/1984" "M"]
+   ["Shelley" "11/9/1989" "F"]
+   ["Masterson" "12/25/1979" "F"]])
 
-(def datata-by-name
-  [["frodo" "50" "zzzing around the shire"]
-   ["merry" "36" "riding ents"]
-   ["pippin" "27" "throwing stones into pits in abandoned mines"]
-   ["samwise" "38" "protecting master frodo"]])
+;; Results should be descended on last name
+(def datata-by-lastname
+  [{:LastName "Steward", :DateOfBirth "5/30/1984", :Gender "M"}
+   {:LastName "Shelley", :DateOfBirth "11/9/1989", :Gender "F"}
+   {:LastName "Michaels", :DateOfBirth "1/1/1970", :Gender "M"}
+   {:LastName "Masterson", :DateOfBirth "12/25/1979", :Gender "F"}])
 
-(def datata-by-age-desc
-  [["frodo" "50" "zzzing around the shire"]
-   ["samwise" "38" "protecting master frodo"]
-   ["merry" "36" "riding ents"]
-   ["pippin" "27" "throwing stones into pits in abandoned mines"]])
+;; Results should be ascending on date of birth
+(def datata-by-dob
+  [{:LastName "Michaels", :DateOfBirth "1/1/1970", :Gender "M"}
+   {:LastName "Masterson", :DateOfBirth "12/25/1979", :Gender "F"}
+   {:LastName "Steward", :DateOfBirth "5/30/1984", :Gender "M"}
+   {:LastName "Shelley", :DateOfBirth "11/9/1989", :Gender "F"}])
 
-(def datata-by-hobby
-  [["samwise" "38" "protecting master frodo"]
-   ["merry" "36" "riding ents"]
-   ["pippin" "27" "throwing stones into pits in abandoned mines"]
-   ["frodo" "50" "zzzing around the shire"]])
-
-(def name-index (sh/get-index "name" datata 0))
-(def age-index (sh/get-index "age" datata 1))
-(def hobby-index (sh/get-index "hobby" datata 2))
-
-(defn name-sort
-  "Comparator that sorts by name, ascending"
-  [a b]
-  (compare (get a name-index) (get b name-index)))
-
-(defn age-sort-desc
-  "Comparator that sorts by age, descending"
-  [a b]
-  (compare (get b age-index) (get a age-index)))
-
-(defn hobby-sort
-  "Comparator that sorts by hobby, ascending"
-  [a b]
-  (compare (get a hobby-index) (get b hobby-index)))
+;; Results should be gender, then last name
+(def datata-by-gender
+  [{:LastName "Masterson", :DateOfBirth "12/25/1979", :Gender "F"}
+   {:LastName "Shelley", :DateOfBirth "11/9/1989", :Gender "F"}
+   {:LastName "Michaels", :DateOfBirth "1/1/1970", :Gender "M"}
+   {:LastName "Steward", :DateOfBirth "5/30/1984", :Gender "M"}])
 
 (deftest sorting-patterns
-  (are [srt d rtn] (= (into [] (sort srt (rest d))) rtn)
-    name-sort datata datata-by-name
-    age-sort-desc datata datata-by-age-desc
-    hobby-sort datata datata-by-hobby))
+  (are [srt d rtn]
+       (= (into [] (sort srt (m/matrix-to-map d))) rtn)
+    sh/compr-lastname datata datata-by-lastname
+    sh/compr-dob      datata datata-by-dob
+    sh/compr-gender   datata datata-by-gender))
 
-
-(def tmp-data [["LastName" "FirstName" "Gender" "FavoriteColor" "DateOfBirth"]
-               ["Frost" "Justin" "M" "chartreuse" "07/05/1981"]
-               ["Kibbler" "Snot" "M" "snot green" "02/28/1977"]
-               ["Greisiger" "Katie" "F" "bubble gum pink" "08/10/1983"]
-               ["Castle" "Tella" "F" "brown" "10/21/1988"]])
-(def get-tmp-data-index (sh/get-index-factory tmp-data))
-(def gender-index (get-tmp-data-index "Gender" 2))
-(def birthdate-index (get-tmp-data-index "DateOfBirth" 4))
-(def lastname-index (get-tmp-data-index "LastName" 0))
-
-(deftest get-index-builder
-  (are [col-index actual] (= col-index actual)
-    gender-index 2
-    birthdate-index 4
-    lastname-index 0))
-
-(deftest comparator-builder
-  (testing "Does comparator return a fn"
-    (is (function? (sh/comparator-factory 0)))))
+(deftest date-formatter
+  (testing "Does it convert M/D/YYYY to YYYYMMDD"
+    (is (= (sh/date-format "3/4/1955") "19550304"))
+    (is (= (sh/date-format "10/1/2005") "20051001"))
+    (is (= (sh/date-format "9/10/2020") "20200910"))))
