@@ -1,0 +1,11 @@
+LastName FirstName Gender FavoriteColor DateOfBirth
+Murray Lucas M Aqua 4/19/1005
+Olivier Dakota F Pink 10/8/2295
+Morley Sylvia F Turquoise 8/23/5312
+Torres Cynthia F Apricot 9/2/3074
+Evans Abdul M Black 1/3/2058
+Norburn Catherine F Rust 10/10/8185
+Gordon Liam M Barbie Pink 9/26/1455
+Jackson Margot F Azure 10/7/6444
+Cox Bart M Orange 2/10/3359
+Knight Christine F Cyan 8/8/9244
