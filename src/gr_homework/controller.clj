@@ -5,6 +5,7 @@
             [gr-homework.handler.sort :as sh]))
 
 (defn merge-file
+  "Merges files to one matrixed set, sharing the header row"
   [files]
   (loop [f files
          header []
