@@ -1,6 +1,11 @@
 (ns gr-homework.handler.sort
   (:require [clojure.string :as s]))
 
+(def sort-keymap {"lastname" :Lastname
+                  "gender" :Gender
+                  "dateofbirth" :DateOfBirth
+                  "demo" :Demo})
+
 ;; Helper functions
 (defn date-format
   "Reformats a date string to YYYYMMDD by string splitting, zero filling and rearranging, for sorting purposes"
