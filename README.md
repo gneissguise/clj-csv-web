@@ -7,7 +7,7 @@ This is a project to demonstrate some of my basic skills in clojure, with the fo
 
 ```clojure
 (ns gr-homework.github)
-(def project-status {:step1 "Completed" :step2 "Not Started"})
+(def project-status {:step1 "Completed" :step2 "In Progress"})
 ```
 
 ## Dependencies
