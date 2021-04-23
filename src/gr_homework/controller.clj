@@ -4,6 +4,8 @@
             [gr-homework.handler.print :as ph]
             [gr-homework.handler.sort :as sh]))
 
+;; I am sure there's a way to simplify this down to 2-3 lines,,
+;; Though my brain is stuck thinking procedurally at the moment
 (defn merge-file
   "Merges files to one matrixed set, sharing the header row"
   [files]

@@ -24,7 +24,7 @@
   "Reaches out to the controller to process
    file(s) [f] into a vec"
   [f]
-  (vec 
+  (vec
    (ctrl/process-file f)))
 
 (defn process
@@ -53,8 +53,32 @@
     (load! source options))
   @store)
 
+(defn store-contains?
+  "Checks to see if there's a person match by LastName and FirstName"
+  [s r]
+  (reduce
+   #(when (and (= (:LastName %2) (:LastName r))
+               (= (:FirstName %2) (:FirstName r)))
+      true)
+   false s))
+
+(defn map-merge
+  "Custom fn to merge record [r] into vec-map atom [a]"
+  [a r]
+  (mapv
+   (fn [m]
+     (let [{last :LastName
+            first :FirstName} m]
+       (if (and (= last (:LastName r))
+                (= first (:FirstName r)))
+         (merge m r)
+         m)))
+   a))
+
 (defn update!
-  "Updates record [r] in the store.  If record 
-   does not exist, a new one is added"
+  "Updates record [r] in the store. Updates match on LastName and
+   FirstName.  If record does not exist, a new one is added"
   [r]
-  nil)
+  (if (store-contains? @store r)
+    (swap! store map-merge r)
+    (swap! store into [r])))
