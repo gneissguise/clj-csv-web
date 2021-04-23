@@ -9,7 +9,7 @@
          header []
          body []]
     (if (empty? f)
-      (vec (concat header body)) ;; empty condition: Return new vector with head & body concatened
+      (into header body) ;; empty condition: Return new vector with head & body concatened
       (let [f1 (first f) ;; not empty: Take the next file, process out the header and merge body into previous
             v  (vec (fh/read-file f1))
             h (if (empty? header)
