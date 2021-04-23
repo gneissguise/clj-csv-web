@@ -1,6 +1,11 @@
 (ns gr-homework.handler.sort
   (:require [clojure.string :as s]))
 
+(def sort-keymap {"lastname" :LastName
+                  "gender" :Gender
+                  "dateofbirth" :DateOfBirth
+                  "demo" :Demo})
+
 ;; Helper functions
 (defn date-format
   "Reformats a date string to YYYYMMDD by string splitting, zero filling and rearranging, for sorting purposes"
@@ -21,3 +26,14 @@
 (def compr-lastname
   #(compare [(:LastName %2)]
             [(:LastName %1)]))
+
+(defn lookup-sort
+  "Pull up a table heading and a sort comparator by keyword [k]"
+  [k]
+  (case k
+    :Gender      ["Sort by Gender, then LastName ascending"
+                  compr-gender]
+    :DateOfBirth ["Sort by DateOfBirth ascending"
+                  compr-dob]
+    :LastName    ["Sort by LastName descending"
+                  compr-lastname]))

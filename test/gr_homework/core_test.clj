@@ -2,10 +2,16 @@
   (:require [clojure.test
              :refer [deftest
                      testing
-                     is]]
+                     is
+                     function?]]
             [gr-homework.core :as gr]))
 
 ;; Tests
 (deftest main-func
-  (testing "-main prints: Hello, World!"
-    (is (= "Hello, World!\n" (with-out-str (gr/-main))))))
+  ;; Simple dependency sanity check
+  (testing "exit"
+    (is (function? gr/exit)))
+  (testing "start-up"
+    (is (function? gr/start-up)))
+  (testing "-main"
+    (is (function? gr/-main))))

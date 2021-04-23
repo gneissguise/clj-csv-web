@@ -20,5 +20,12 @@
 (deftest table-printing
   (testing "that it prints the table"
     (is (=
-         (with-out-str (pr/print-table (m/matrix-to-map tmp-data)))
+         (with-out-str (pr/print-table (m/matr->map tmp-data)))
          table-out))))
+
+(deftest heading-displays
+  (testing "the horizontal rule"
+    (is (= (pr/horiz-rule 5) "=====")))
+  (testing "the header message"
+    (is (= (with-out-str (pr/print-heading "It's worrrkiiing!"))
+           "\n ======================= \n    It's worrrkiiing! \n =======================\n"))))

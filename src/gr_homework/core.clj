@@ -1,14 +1,25 @@
 (ns gr-homework.core
+  (:require [gr-homework.handler.cli :as cli]
+            [gr-homework.controller :as ctrl])
   (:gen-class))
 
-;; TODO: Stage 1
-;; - Add clojure.tools for cli arg handling
-;; - fns to detect delimiter, or provide an arg to set
-;; - generate 3 files for examples
-;; - output 3 ways: sort by gender, birth date ascending, last name descending
+(defn exit 
+  "Gracefully handle exiting the application on error"
+  [status msg]
+  (println msg)
+  (System/exit status))
 
+(defn start-up
+  "Lifts the passed args from options by keyword and pass to the display endpoint on the controller"
+  [options]
+  (let [srt (:sort options)
+        files (:file options)]
+    (ctrl/display files srt)))
 
 (defn -main
-  "I don't do a whole lot ... yet."
+  "I do a bit more now!"
   [& args]
-  (println "Hello, World!"))
+  (let [{:keys [options exit-message ok?]} (cli/validate-args args)]
+    (if exit-message
+      (exit (if ok? 0 1) exit-message)
+      (start-up options))))
