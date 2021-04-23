@@ -9,7 +9,8 @@
                  [org.clojure/tools.cli "1.0.206"]
                  [compojure "1.6.1"]
                  [jumblerg/ring-cors "2.0.0"]
-                 [org.clojure/data.json "2.2.1"]]
+                 [org.clojure/data.json "2.2.1"]
+                 [ring/ring-json "0.5.1"]]
   :main ^:skip-aot gr-homework.core
   :target-path "target/%s"
   :plugins [[lein-ring "0.12.5"]]
