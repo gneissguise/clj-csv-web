@@ -3,18 +3,21 @@
             [gr-homework.controller :as ctrl])
   (:gen-class))
 
-(defn exit [status msg]
+(defn exit 
+  "Gracefully handle exiting the application on error"
+  [status msg]
   (println msg)
   (System/exit status))
 
 (defn start-up
+  "Lifts the passed args from options by keyword and pass to the display endpoint on the controller"
   [options]
   (let [srt (:sort options)
         files (:file options)]
     (ctrl/display files srt)))
 
 (defn -main
-  "I don't do a whole lot ... yet."
+  "I do a bit more now!"
   [& args]
   (let [{:keys [options exit-message ok?]} (cli/validate-args args)]
     (if exit-message

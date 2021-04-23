@@ -3,7 +3,8 @@
             [gr-homework.handler.file :as fh]
             [gr-homework.handler.print :as ph]
             [gr-homework.handler.sort :as sh]))
-(defn merge-files-to-vec
+
+(defn merge-file
   [files]
   (loop [f files
          header []
@@ -21,23 +22,27 @@
                 (into body sv))]
         (recur (rest f) h b)))))
 
-(defn process-to-map
+(defn process-file
+  "Takes a vec of filenames, merges into a 2d matrix, trims spaces from
+   fields, then converts to a map"
   [f]
-  (->> (merge-files-to-vec f)
-       (cm/matrix-trim-spaces)
-       (cm/matrix-to-map)))
+  (-> f
+      merge-file
+      cm/matrim
+      cm/matr->map))
 
 (defn display
+  "Display endpoint, takes options passed to the command line
+   and prints a table with the data formatted into a table and sorted"
   [files srt]
-  (let [tbl (process-to-map files)
+  (let [tbl (process-file files)
         get-cmpr (if (= srt :Demo)
-               [(sh/lookup-sort :Gender)
-                (sh/lookup-sort :DateOfBirth)
-                (sh/lookup-sort :LastName)]
-               [(sh/lookup-sort srt)])]
+                   [(sh/lookup-sort :Gender)
+                    (sh/lookup-sort :DateOfBirth)
+                    (sh/lookup-sort :LastName)]
+                   [(sh/lookup-sort srt)])]
     (doseq [c get-cmpr]
       (let [heading (first c)
             compr (last c)]
         (ph/print-heading heading)
         (ph/print-table tbl compr)))))
-

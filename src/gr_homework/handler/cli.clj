@@ -31,13 +31,11 @@
        (s/join \newline)))
 
 ;;fn mostly boilerplate lifted from the examples on the clojure.tools.cli github repo
-
 (defn error-msg [errors]
   (str "The following errors occurred while processing your request:\n\n"
        (s/join \newline errors)))
 
 ;;fn mostly boilerplate lifted from the examples on the clojure.tools.cli github repo
-
 (defn validate-args
   "Validate command line arguments. Either return a map indicating the program
   should exit (with a error message, and optional ok status), or a map
