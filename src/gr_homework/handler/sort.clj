@@ -1,7 +1,7 @@
 (ns gr-homework.handler.sort
   (:require [clojure.string :as s]))
 
-(def sort-keymap {"lastname" :Lastname
+(def sort-keymap {"lastname" :LastName
                   "gender" :Gender
                   "dateofbirth" :DateOfBirth
                   "demo" :Demo})

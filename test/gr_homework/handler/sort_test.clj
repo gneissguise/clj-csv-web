@@ -34,7 +34,7 @@
 
 (deftest sorting-patterns
   (are [srt d rtn]
-       (= (into [] (sort srt (m/matrix-to-map d))) rtn)
+       (= (into [] (sort srt (m/matr->map d))) rtn)
     sh/compr-lastname datata datata-by-lastname
     sh/compr-dob      datata datata-by-dob
     sh/compr-gender   datata datata-by-gender))

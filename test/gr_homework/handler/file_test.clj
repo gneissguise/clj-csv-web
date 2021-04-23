@@ -77,15 +77,9 @@
 
 (deftest file-delim-detections
   (are [exp d s] (exp (fh/detect-delim s) d)
-    = "," "1,2,3,4,5,6,7,8,9,0"
-    = "|" "this|is|how|we|do|it"
-    = " " "I mean this is pretty much just a sentence."
-    = fh/default-file-delim (string/join
-                             fh/default-file-delim
-                             ["el" "gallo" "es" "muy" "guapo"])
-    not= "" (string/join
-             fh/default-file-delim
-             ["are" "we" "really" "testing" "" "values?"])
-    not= nil (string/join
-              fh/default-file-delim
-              ["are" "we" "really" "testing" nil "values?"])))
+    = \, "1,2,3,4,5,6,7,8,9,0"
+    = \| "this|is|how|we|do|it"
+    = \space "I mean this is pretty much just a sentence."
+    = \, (string/join \& ["el" "gallo" "es" "muy" "guapo"])
+    not= "" (string/join \, ["are" "we" "really" "testing" "" "values?"])
+    not= nil (string/join \, ["are" "we" "really" "testing" nil "values?"])))
