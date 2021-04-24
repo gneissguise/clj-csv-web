@@ -7,6 +7,7 @@
   :dependencies [[org.clojure/clojure "1.10.1"]
                  [org.clojure/data.csv "1.0.0"]
                  [org.clojure/tools.cli "1.0.206"]
+                 [ring "1.9.2"]
                  [compojure "1.6.1"]
                  [jumblerg/ring-cors "2.0.0"]
                  [org.clojure/data.json "2.2.1"]

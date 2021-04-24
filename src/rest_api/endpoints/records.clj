@@ -4,12 +4,10 @@
             [rest-api.db :as db]))
 
 (defn get!
-  ([]
-   (get! {:sort :LastName}))
-
-  ([args]
-   (json/write-str
-    {:result (db/select {:sort (sh/sort-keymap args)})})))
+  [args]
+  (let [token (sh/sort-key args)
+        col (db/select-using {:sort token})]
+    (json/write-str {:result col})))
 
 (defn post!
   [args]

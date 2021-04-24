@@ -1,5 +1,5 @@
 (ns rest-api.handler
-  (:require [compojure.core :refer [defroutes GET POST context]]
+  (:require [compojure.core :refer [defroutes GET POST]]
             [compojure.route :as route]
             [ring.middleware.reload :refer [wrap-reload]]
             [jumblerg.middleware.cors :refer [wrap-cors]]
@@ -7,29 +7,19 @@
                                           wrap-json-body]]
             [rest-api.endpoints.records :as records]))
 
+(defn keywordize [m]
+  (zipmap (map keyword (keys m)) (vals m)))
+
 ;; Basic route setup
 (defroutes app-routes
   (GET "/" [] "Go time!")
-  (context "/records" []
-    (defroutes records-routes
-      (GET  "/" [] (records/get!))
-      (POST "/" {body :body} (records/post! body))
-      (context "/:id" [id]
-        (defroutes record-routes
-          (GET    "/" [] (records/get! id))))))
+  (GET  "/records" [] (records/get! "lastname"))
+  (GET "/records/:srt" [srt] (records/get! srt))
+  (POST "/records" {body :body} 
+    (records/post! (keywordize body)))
   (route/not-found "Not Found"))
 
-;; (defroutes app-routes
-;;   (GET "/" [] 
-;;     "Locked and loaded, ready to roll.")
-;;   (GET "/records/:srt" [srt]
-;;     (records/get! srt))
-;;   (POST "/records" [args]
-;;     (records/post! args)) 
-;;   (route/not-found 
-;;    "404040404 File Not Found Not File"))
-
-;; accept everything
+;; Update CORS rule to accept everything
 (wrap-cors app-routes #".*")
 (wrap-cors app-routes identity)
 

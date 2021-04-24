@@ -2,10 +2,13 @@ POST http://localhost:3000/records
 content-type: application/json
 
 {
-    "name": "sample",
-    "time": "Wed, 21 Oct 2015 18:27:50 GMT"
+    "LastName": "Dundee",
+    "FirstName": "Crocodile",
+    "Gender": "M",
+    "DateOfBirth": "12/15/1957",
+    "FavoriteColor": "Red"
 }
 
 ###
 
-GET http://localhost:3000/records/scoop
+GET http://localhost:3000/records/gender
