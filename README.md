@@ -7,7 +7,7 @@ This is a project to demonstrate some of my basic skills in clojure, with the fo
 
 ```clojure
 (ns gr-homework.github)
-(def project-status {:step1 "Completed" :step2 "Not Started"})
+(def project-status {:step1 "Completed" :step2 "In Progress"})
 ```
 
 ## Dependencies
@@ -16,10 +16,11 @@ This is a project to demonstrate some of my basic skills in clojure, with the fo
 - Clojure 1.10
 - Leinengen
 
-## Installation
+## How To Run the Command Line Utility
+### Installation
    
     $ lein install
-## Usage
+### Usage
    
     // Running tests
     $ lein test
@@ -32,18 +33,16 @@ This is a project to demonstrate some of my basic skills in clojure, with the fo
 
     // Running jar:
     $ java -jar target/gr-homework-1.0.0-standalone.jar [args]
-## Options
-
-    gr-homework: This is my submission for a cli delimited file parser & REST api for a job interview.
+### Options
 
     Usage: gr-homework [options]
 
     Options:
-        -s, --sort SORT  :Demo                                                                                    Sort option
-        -f, --file FILE  ["./examples/comma-delim.txt" "./examples/pipe-delim.txt" "./examples/space-delim.txt"]  Files to load
-        -h, --help                                                                                                Help
-
-## Examples
+    -s, --sort SORT  :Demo  Sort option
+    -f, --file FILE  []     Files to load
+    -h, --help              Help
+    
+### Examples
 
     $ lein run -- --file /my/file/path.txt --sort DateOfBirth
     =================================== 
@@ -56,6 +55,123 @@ This is a project to demonstrate some of my basic skills in clojure, with the fo
     |     Leslie |      Moira |       F |           Gold |    2/23/0839 |
     |     Murray |      Lucas |       M |           Aqua |    4/19/1005 |
     |   Thatcher |     Trisha |       F |          Brown |    9/24/1068 |
+
+    // Check the directory 'examples/' for sample files!
+    $ ls -l examples/
+    -rw-r--r--. 1 user users 432 Apr 22 22:18 comma-delim.txt
+    -rw-r--r--. 1 user users 473 Apr 22 02:19 pipe-delim.txt
+    -rw-r--r--. 1 user users 379 Apr 22 22:18 space-delim.txt
+## How To Run the Web Server Api
+
+### Installation
+
+    $ lein ring uberjar
+
+### Usage
+
+    // Running server from leiningen
+    $ lein ring server
+
+    OR
+
+    // Running standalone server (After installation)
+    $ java -jar target/uberjar/gr-homework-1.5.0-standalone.jar
+
+A jetty http server will launch on port 3000 which you may access via curl or postman
+
+### Examples
+
+    // Check if the server is running
+    $ curl localhost:3000
+    Go time!
+
+    // Accessing records
+    //      /gender -> sort by Gender, LastName
+    //      /dateofbirth -> DateOfBirth ascending
+    //      /lastname -> LastName descending
+    //
+    // *NOTE: 'jq' is a json formatter for the command line.  It is 
+    // a handly tool if you use 'curl' frequently. Look for it in your
+    // package manager!
+    $ curl -s  localhost:3000/records/gender | jq
+    {
+        "result": [
+        {
+            "LastName": "Edwards",
+            "FirstName": "Noemi",
+            "Gender": "F",
+            "FavoriteColor": "Rosegold",
+            "DateOfBirth": "6/25/8705"
+        },
+        {
+            "LastName": "Emmott",
+            "FirstName": "Aisha",
+            "Gender": "F",
+            "FavoriteColor": "Orange",
+            "DateOfBirth": "1/2/3027"
+        },
+        {
+            "LastName": "Harrington",
+            "FirstName": "Elisabeth",
+            "Gender": "F",
+            "FavoriteColor": "Maroon",
+            "DateOfBirth": "10/8/0813"
+        },
+    ...
+
+    // Adding a record via POST
+    // NOTE: check for your record at the end of the return request
+    $ curl -X POST -H 'content-type: application/json' \
+        -d '{"LastName": "Dundee","FirstName": "Crocodile","Gender": "M","DateOfBirth": "12/15/1957","FavoriteColor": "Red"}' \
+        http://localhost:3000/records | jq
+    {
+        "result": [
+            ... Lots of records
+            {
+                "LastName": "Dundee",
+                "FirstName": "Crocodile",
+                "Gender": "M",
+                "DateOfBirth": "12/15/1957",
+                "FavoriteColor": "Red"
+            }
+        ]
+    }
+
+    // Updating a record - Provide the LastName and FirstName otherwise
+    // the request will be treated as a new record and add to the list.
+    $ curl -X POST -H 'content-type: application/json' \
+        -d '{"LastName": "Dundee","FirstName": "Crocodile","FavoriteColor": "Green"}' \
+        http://localhost:3000/records | jq
+    {
+        "result": [
+            ... Lots of records
+            {
+                "LastName": "Dundee",
+                "FirstName": "Crocodile",
+                "Gender": "M",
+                "DateOfBirth": "12/15/1957",
+                "FavoriteColor": "Green"
+            }
+        ]
+    }
+
+## Test Coverage
+    |----------------------------+---------+---------|
+    |                  Namespace | % Forms | % Lines |
+    |----------------------------+---------+---------|
+    |     gr-homework.controller |   77.24 |   89.19 |
+    | gr-homework.converter.maps |  100.00 |  100.00 |
+    |           gr-homework.core |   11.11 |   30.77 |
+    |    gr-homework.handler.cli |   93.68 |   96.15 |
+    |   gr-homework.handler.file |  100.00 |  100.00 |
+    |  gr-homework.handler.print |  100.00 |  100.00 |
+    |   gr-homework.handler.sort |   89.13 |   92.00 |
+    |                rest-api.db |   79.41 |   86.67 |
+    | rest-api.endpoints.records |  100.00 |  100.00 |
+    |           rest-api.handler |   69.47 |   95.00 |
+    |----------------------------+---------+---------|
+    |                  ALL FILES |   81.91 |   89.34 |
+    |----------------------------+---------+---------|
 
 ## License
 

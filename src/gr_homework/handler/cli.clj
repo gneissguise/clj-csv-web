@@ -7,15 +7,12 @@
 (def cli-options
   [["-s"  "--sort SORT" "Sort option"
     :default :Demo
-    :parse-fn #(get sh/sort-keymap (s/lower-case %))
-    :validate [#(not
-                 (contains? sh/sort-keymap (s/lower-case %)))
-               "Valid sort options are 'LastName', 'Gender', 'DateOfBirth' or 'Demo' (runs all three on all three files)"]]
+    :parse-fn #(sh/sort-key  %)
+    :validate [#(get (hash-set :LastName :Gender :DateOfBirth :Demo) %)
+               "Valid sort options are 'LastName', 'Gender', 'DateOfBirth' or 'Demo'"]]
    ["-f" "--file FILE" "Files to load"
     :multi true
-    :default ["./examples/comma-delim.txt"
-              "./examples/pipe-delim.txt"
-              "./examples/space-delim.txt"]
+    :default []
     :update-fn conj]
    ["-h" "--help" "Help"]])
 

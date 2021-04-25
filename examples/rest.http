@@ -1,0 +1,20 @@
+POST http://localhost:3000/records
+content-type: application/json
+
+{
+    "LastName": "Dundee",
+    "FirstName": "Crocodile",
+    "Gender": "M",
+    "DateOfBirth": "12/15/1957",
+    "FavoriteColor": "Red"
+}
+
+###
+
+GET http://localhost:3000/records/gender
+
+###
+GET http://localhost:3000/records/lastname
+
+###
+GET http://localhost:3000/records/dateofbirth

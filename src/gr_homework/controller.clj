@@ -4,7 +4,10 @@
             [gr-homework.handler.print :as ph]
             [gr-homework.handler.sort :as sh]))
 
+;; I am sure there's a way to simplify this down to 2-3 lines,,
+;; Though my brain is stuck thinking procedurally at the moment
 (defn merge-file
+  "Merges files to one matrixed set, sharing the header row"
   [files]
   (loop [f files
          header []
@@ -35,7 +38,12 @@
   "Display endpoint, takes options passed to the command line
    and prints a table with the data formatted into a table and sorted"
   [files srt]
-  (let [tbl (process-file files)
+  (let [f (if (empty? files) 
+            ["./examples/comma-delim.txt"
+             "./examples/pipe-delim.txt"
+             "./examples/space-delim.txt"]
+              files)
+        tbl (process-file f)
         get-cmpr (if (= srt :Demo)
                    [(sh/lookup-sort :Gender)
                     (sh/lookup-sort :DateOfBirth)

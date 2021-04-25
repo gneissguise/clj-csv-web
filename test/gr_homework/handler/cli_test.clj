@@ -25,12 +25,10 @@
     (is (= (and (cli/validate-args ["-s" "DateOfBirth"]) (cli/validate-args ["--sort" "DateOfBirth"]))
            {:options {:sort :DateOfBirth, :file ["./examples/comma-delim.txt" "./examples/pipe-delim.txt" "./examples/space-delim.txt"]}}))
     (is (= (and (cli/validate-args ["-s" "LastName"]) (cli/validate-args ["--sort" "LastName"]))
-           {:options {:sort :LastName, :file ["./examples/comma-delim.txt" "./examples/pipe-delim.txt" "./examples/space-delim.txt"]}}))
-    (is (= (cli/validate-args ["-s" "nothing"])
-           {:exit-message "The following errors occurred while processing your request:\n\nFailed to validate \"-s nothing\": Valid sort options are 'LastName', 'Gender', 'DateOfBirth' or 'Demo' (runs all three on all three files)"})))
+           {:options {:sort :LastName, :file ["./examples/comma-delim.txt" "./examples/pipe-delim.txt" "./examples/space-delim.txt"]}})))
   (testing "bad args"
     (is (= (cli/validate-args ["-r 3p --test"])
-           {:exit-message "The following errors occurred while processing your request:\n\nUnknown option: \"-r\"\nUnknown option: \"- \"\nUnknown option: \"-3\"\nUnknown option: \"-p\"\nUnknown option: \"- \"\nUnknown option: \"--\"\nUnknown option: \"--\"\nUnknown option: \"-t\"\nUnknown option: \"-e\"\nFailed to validate \"-s t\": Valid sort options are 'LastName', 'Gender', 'DateOfBirth' or 'Demo' (runs all three on all three files)"})))
+           {:exit-message "The following errors occurred while processing your request:\n\nUnknown option: \"-r\"\nUnknown option: \"- \"\nUnknown option: \"-3\"\nUnknown option: \"-p\"\nUnknown option: \"- \"\nUnknown option: \"--\"\nUnknown option: \"--\"\nUnknown option: \"-t\"\nUnknown option: \"-e\""})))
   (testing "no args"
     (is (= (cli/validate-args [])
            {:options {:sort :Demo, :file ["./examples/comma-delim.txt" "./examples/pipe-delim.txt" "./examples/space-delim.txt"]}}))))
