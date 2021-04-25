@@ -38,7 +38,12 @@
   "Display endpoint, takes options passed to the command line
    and prints a table with the data formatted into a table and sorted"
   [files srt]
-  (let [tbl (process-file files)
+  (let [f (if (empty? files) 
+            ["./examples/comma-delim.txt"
+             "./examples/pipe-delim.txt"
+             "./examples/space-delim.txt"]
+              files)
+        tbl (process-file f)
         get-cmpr (if (= srt :Demo)
                    [(sh/lookup-sort :Gender)
                     (sh/lookup-sort :DateOfBirth)

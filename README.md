@@ -35,15 +35,12 @@ This is a project to demonstrate some of my basic skills in clojure, with the fo
     $ java -jar target/gr-homework-1.0.0-standalone.jar [args]
 ### Options
 
-    gr-homework: This is my submission for a cli delimited file parser & REST api for a job interview.
-
     Usage: gr-homework [options]
 
     Options:
-        -s, --sort SORT  :Demo                                                                                    Sort option
-        -f, --file FILE  ["./examples/comma-delim.txt" "./examples/pipe-delim.txt" "./examples/space-delim.txt"]  Files to load
-        -h, --help                                                                                                Help
-
+    -s, --sort SORT  :Demo  Sort option
+    -f, --file FILE  []     Files to load
+    -h, --help              Help
     
 ### Examples
 
@@ -162,10 +159,10 @@ A jetty http server will launch on port 3000 which you may access via curl or po
     |----------------------------+---------+---------|
     |                  Namespace | % Forms | % Lines |
     |----------------------------+---------+---------|
-    |     gr-homework.controller |   78.68 |   91.18 |
+    |     gr-homework.controller |   77.24 |   89.19 |
     | gr-homework.converter.maps |  100.00 |  100.00 |
     |           gr-homework.core |   11.11 |   30.77 |
-    |    gr-homework.handler.cli |   93.88 |   96.15 |
+    |    gr-homework.handler.cli |   93.68 |   96.15 |
     |   gr-homework.handler.file |  100.00 |  100.00 |
     |  gr-homework.handler.print |  100.00 |  100.00 |
     |   gr-homework.handler.sort |   89.13 |   92.00 |
@@ -173,7 +170,7 @@ A jetty http server will launch on port 3000 which you may access via curl or po
     | rest-api.endpoints.records |  100.00 |  100.00 |
     |           rest-api.handler |   69.47 |   95.00 |
     |----------------------------+---------+---------|
-    |                  ALL FILES |   82.30 |   89.69 |
+    |                  ALL FILES |   81.91 |   89.34 |
     |----------------------------+---------+---------|
 
 ## License

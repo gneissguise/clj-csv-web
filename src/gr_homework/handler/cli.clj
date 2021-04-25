@@ -12,9 +12,7 @@
                "Valid sort options are 'LastName', 'Gender', 'DateOfBirth' or 'Demo'"]]
    ["-f" "--file FILE" "Files to load"
     :multi true
-    :default ["./examples/comma-delim.txt"
-              "./examples/pipe-delim.txt"
-              "./examples/space-delim.txt"]
+    :default []
     :update-fn conj]
    ["-h" "--help" "Help"]])
 
