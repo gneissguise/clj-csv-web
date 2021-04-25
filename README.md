@@ -7,7 +7,8 @@ This is a project to demonstrate some of my basic skills in clojure, with the fo
 
 ```clojure
 (ns gr-homework.github)
-(def project-status {:step1 "Completed" :step2 "In Progress"})
+(def project-status {:step1 "Completed"
+                     :step2 "Completed"})
 ```
 
 ## Dependencies
@@ -32,7 +33,7 @@ This is a project to demonstrate some of my basic skills in clojure, with the fo
     $ lein install
 
     // Running jar:
-    $ java -jar target/gr-homework-1.0.0-standalone.jar [args]
+    $ java -jar target/gr-homework-2.0.0-standalone.jar [args]
 ### Options
 
     Usage: gr-homework [options]
@@ -75,7 +76,7 @@ This is a project to demonstrate some of my basic skills in clojure, with the fo
     OR
 
     // Running standalone server (After installation)
-    $ java -jar target/uberjar/gr-homework-1.5.0-standalone.jar
+    $ java -jar target/uberjar/gr-homework-2.0.0-standalone.jar
 
 A jetty http server will launch on port 3000 which you may access via curl or postman
 

@@ -1,4 +1,4 @@
-(defproject gr-homework "1.5.0"
+(defproject gr-homework "2.0.0"
   :description "Delimited Flat File Parsing and REST api"
   :url "https://github.com/gneissguise/gr-homework/README.md"
   :license {:name "EPL-2.0 OR GPL-2.0-or-later WITH Classpath-exception-2.0"
