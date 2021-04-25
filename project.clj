@@ -14,7 +14,8 @@
                  [ring/ring-json "0.5.1"]]
   :main ^:skip-aot gr-homework.core
   :target-path "target/%s"
-  :plugins [[lein-ring "0.12.5"]]
+  :plugins [[lein-ring "0.12.5"]
+            [lein-cloverage "1.2.2"]]
   :ring {:handler rest-api.handler/reloadable-app}
   :profiles {:uberjar {:aot :all
                        :jvm-opts ["-Dclojure.compiler.direct-linking=true"]}

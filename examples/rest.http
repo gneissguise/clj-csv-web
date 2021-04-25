@@ -12,3 +12,4 @@ content-type: application/json
 ###
 
 GET http://localhost:3000/records/gender
+

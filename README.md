@@ -158,6 +158,23 @@ A jetty http server will launch on port 3000 which you may access via curl or po
         ]
     }
 
+## Test Coverage
+    |----------------------------+---------+---------|
+    |                  Namespace | % Forms | % Lines |
+    |----------------------------+---------+---------|
+    |     gr-homework.controller |   78.68 |   91.18 |
+    | gr-homework.converter.maps |  100.00 |  100.00 |
+    |           gr-homework.core |   11.11 |   30.77 |
+    |    gr-homework.handler.cli |   93.88 |   96.15 |
+    |   gr-homework.handler.file |  100.00 |  100.00 |
+    |  gr-homework.handler.print |  100.00 |  100.00 |
+    |   gr-homework.handler.sort |   89.13 |   92.00 |
+    |                rest-api.db |   79.41 |   86.67 |
+    | rest-api.endpoints.records |  100.00 |  100.00 |
+    |           rest-api.handler |   69.47 |   95.00 |
+    |----------------------------+---------+---------|
+    |                  ALL FILES |   82.30 |   89.69 |
+    |----------------------------+---------+---------|
 
 ## License
 
