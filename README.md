@@ -1,4 +1,4 @@
-# gr-homework
+# clj-csv-web
 
 This is a project to demonstrate some of my basic skills in clojure, with the following guidelines:
 
